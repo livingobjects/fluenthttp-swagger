@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Api documentation</title>
+    [[webjar 'bootstrap.css']]
+    <style>
+        .resourceUri {
+            font-family: Monaco, 'Lucida Console', monospace;
+        }
+
+        h1 {
+            margin: 0;
+            background: #2D679C;
+            padding: 20px 45px;
+            color: #fff;
+            text-shadow: 1px 1px 1px rgba(0, 0, 0, .3);
+            border-bottom: 1px solid #15A1D8;
+            font-family: Monaco, 'Lucida Console', monospace;
+            font-size: 28px;
+        }
+
+    </style>
+</head>
+<body>
+<h1>Api documentation index</h1>
+
+<div class="info col-md-8">
+    <ul class="resourceUri">
+        [[#each uris]]
+        <li><a href="api-doc/[[.]]">[[.]]</a></li>
+        [[/each]]
+    </ul>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,71 @@
+swagger: '2.0'
+info:
+  title: Babylon API
+  description: Babylon API, the i18n service
+  version: "1"
+# the domain of the service
+host: Babylon.livingobjects.com
+# array of all schemes that your API supports
+schemes:
+  - http
+# will be prefixed to all paths
+basePath: /translations
+produces:
+  - application/json
+paths:
+  /:
+    get:
+      summary: get all translations
+      description: |
+        get all dictionary
+      responses:
+        200:
+          description: an array containing all the translations
+          schema:
+            type: array
+            items:
+              type: object
+              properties:
+                "{key}":
+                  type: string
+                  description: The key
+  /{locale}:
+    get:
+      summary: Get all translations for a given locale.
+      parameters:
+        - name: locale
+          in: path
+          type: string
+          description: The locale.
+      responses:
+        200:
+          description: An object containing all the translations for the locale.
+          schema:
+            type: object
+            properties:
+              "{key}":
+                type: string
+                description: The key
+        404:
+          description: When the query uuid doesnt exists.
+
+securityDefinitions:
+  Doorman:
+    type: apiKey
+    name: X-UserToken
+    in: header
+
+definitions:
+   Error:
+    properties:
+      message:
+        type: string
+        description: The raw error message.
+      code:
+        type: string
+        description: The error code (used for i18n)
+      fields:
+        type: array
+        description: List of additionnal fields to display in the error message (for i18n).
+        items:
+          type: string
