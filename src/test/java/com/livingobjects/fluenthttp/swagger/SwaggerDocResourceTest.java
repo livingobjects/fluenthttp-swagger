@@ -31,4 +31,17 @@ public class SwaggerDocResourceTest {
 
         webServer.stop();
     }
+
+    @Test
+    public void infiniteServer() throws Exception {
+        ImmutableList<File> of = ImmutableList.of(new File(SwaggerDocResourceTest.class.getClassLoader().getResource("api.yaml").toURI()));
+        WebServer webServer = new WebServer().configure(routes -> routes.add(new SwaggerDocResource(of))
+        ).startOnRandomPort();
+
+        System.out.println(webServer.port());
+
+        while (true) {
+            Thread.sleep(1000);
+        }
+    }
 }

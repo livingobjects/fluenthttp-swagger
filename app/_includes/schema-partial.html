@@ -1,0 +1,22 @@
+<div class="indented">
+
+    [[#if schema.title.isPresent]]
+    <h3 id="/definitions/[[this.title.get]]}">[[schema.title.get]]</h3>
+    [[/if]]
+
+    <div class="mono"><span class="bold">Type: </span><span class="type bold">[[schema.type.value]]</span></div>
+    [[#if schema.description.isPresent]]
+    <div class="mono">
+        <span class="bold">Description: </span><span>[[ schema.description.get ]]</span>
+    </div>
+    [[/if]]
+
+    [[#if schema.type.isString]]
+        [[> schema-type-string schema]]
+    [[/if]]
+    [[#if schema.type.isRef]]
+        [[> schema-type-ref schema]]
+    [[/if]]
+
+
+</div>

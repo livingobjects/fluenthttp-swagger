@@ -1,0 +1,27 @@
+<div>
+    [[#if schema.format.isPresent]]
+        <span class="mono">
+            <span class="bold">Format: </span><span>[[schema.format.get]]</span>
+        </span>
+    [[/if]]
+    [[#if schema.enumeration.isPresent]]
+        <span class="mono">
+            <span class="bold">Format: </span><span>[[schema.enumeration.get]]</span>
+        </span>
+    [[/if]]
+    [[#if schema.pattern.isPresent]]
+        <span class="mono">
+            <span class="bold">Format: </span><span>[[schema.pattern.get]]</span>
+        </span>
+    [[/if]]
+    [[#if schema.minLength.isPresent]]
+        <span class="mono">
+            <span class="bold">Format: </span><span>[[schema.minLength.get]]</span>
+        </span>
+    [[/if]]
+    [[#if schema.maxLength.isPresent]]
+        <span class="mono">
+            <span class="bold">Format: </span><span>[[schema.maxLength.get]]</span>
+        </span>
+    [[/if]]
+</div>
