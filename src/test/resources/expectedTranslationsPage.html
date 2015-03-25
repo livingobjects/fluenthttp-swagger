@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Api documentation</title>
+    <link rel="stylesheet" href="/webjars/bootstrap/3.3.4/css/bootstrap.css">
+    <style>
+
+        .mono {
+            font-family: Monaco, 'Lucida Console', monospace;
+        }
+
+        .bold {
+            font-weight: bold;
+        }
+
+        .resourceUri {
+            font-family: Monaco, 'Lucida Console', monospace;
+        }
+
+        .GET {
+            font-family: Monaco, 'Lucida Console', monospace;
+            background: rgb(35, 146, 247);
+            color: #fff;
+        }
+
+        .POST {
+            font-family: Monaco, 'Lucida Console', monospace;
+            background: rgb(19, 194, 15);
+            color: #fff;
+        }
+
+        .PUT {
+            font-family: Monaco, 'Lucida Console', monospace;
+            background: rgb(255, 144, 0);
+            color: #fff;
+        }
+
+        .DELETE {
+            font-family: Monaco, 'Lucida Console', monospace;
+            background: rgb(227, 0, 18);
+            color: #fff;
+        }
+
+        .inlined {
+            font-style: italic;
+            font-weight: normal;
+        }
+
+        .indented {
+            margin-left: 20px;
+        }
+
+        .type {
+            color: #468847;
+        }
+
+        h1 {
+            margin: 0;
+            background: #2D679C;
+            padding: 20px 45px;
+            color: #fff;
+            text-shadow: 1px 1px 1px rgba(0, 0, 0, .3);
+            border-bottom: 1px solid #15A1D8;
+            font-family: Monaco, 'Lucida Console', monospace;
+            font-size: 28px;
+        }
+
+    </style>
+</head>
+<body>
+<h1>Api documentation</h1>
+
+<div class="info col-md-8">
+    <h2 class="header"><span>Babylon API</span>
+        <small class="inlined">(<a href="translations/raw">Download raw file</a>)</small>
+    </h2>
+
+    <div class="mono">Babylon API, the i18n service</div>
+
+    <div class="mono bold">Version: <span>1</span></div>
+</div>
+
+<div class="resources col-md-8">
+    <h2 class="header">Resources:</h2>
+
+    
+    <div class="panel-group resources" id="resourcesAccordion" role="tablist" aria-multiselectable="true">
+        <div class="panel panel-default">
+            <div class="panel-heading" role="tab">
+                <a data-toggle="collapse" data-parent="#resourcesAccordion" href="#collapse0"
+                   aria-controls="#collapse0" aria-expanded="false">
+                    <span class="resourceUri GET">GET</span>&nbsp;
+                    <span class="resourceUri">/translations/</span>&nbsp;&nbsp;
+                    <span class="mono inlined">get all translations</span>
+                    
+                </a>
+            </div>
+
+            <div id="collapse0" class="panel-body panel-collapse collapse">
+                <h4>Description</h4>
+                
+                <span>get all dictionary
+</span>
+                
+                <h4>Security</h4>
+
+                
+
+                <h4>Parameters</h4>
+
+                <table class="parameters table table-bordered table-striped">
+                    <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Located in</th>
+                        <th>Description</th>
+                        <th>Required</th>
+                        <th>Schema</th>
+                    </tr>
+                    </thead>
+                    
+                </table>
+
+                <h4>Responses</h4>
+
+                <table class="responses table table-bordered table-striped">
+                    <thead>
+                    <tr>
+                        <th>Code</th>
+                        <th>Description</th>
+                        <th>Schema</th>
+                    </tr>
+                    </thead>
+                    
+                    <tbody class="responses">
+                    <tr>
+                        <td><span class="mono">200</span></td>
+                        <td>
+                            
+                            <span class="mono">an array containing all the translations</span>
+                            
+                        </td>
+                        <td>
+                            
+                            <div>
+                                <div class="indented">
+    
+
+    <div class="mono"><span class="bold">Type: </span><span class="type bold">array</span></div>
+    
+
+    
+    
+    
+    
+    
+        <div>
+    <span class="mono bold">Items: </span>
+    <span>
+        <div class="indented">
+    
+
+    <div class="mono"><span class="bold">Type: </span><span class="type bold">object</span></div>
+    
+
+    
+    
+    
+    
+    
+    
+        <div>
+    <span>{</span>
+    <ul class="properties">
+        
+        <li>
+            <span>{key}
+                
+                
+                </span>:&nbsp;
+            
+
+            <div class="indented">
+    
+
+    <div class="mono"><span class="bold">Type: </span><span class="type bold">string</span></div>
+    
+    <div class="mono">
+        <span class="bold">Description: </span><span>The key</span>
+    </div>
+    
+
+    
+        <div>
+    
+    
+    
+    
+    
+</div>
+    
+    
+    
+    
+    
+    
+    
+    
+</div>
+        </li>
+        
+    </ul>
+    <span>}</span>
+</div>
+    
+    
+    
+</div>
+    </span>
+</div>
+    
+    
+    
+    
+</div>
+                            </div>
+                            
+                        </td>
+                    </tr>
+                    </tbody>
+                    
+                </table>
+            </div>
+        </div>
+    </div>
+    
+    <div class="panel-group resources" id="resourcesAccordion" role="tablist" aria-multiselectable="true">
+        <div class="panel panel-default">
+            <div class="panel-heading" role="tab">
+                <a data-toggle="collapse" data-parent="#resourcesAccordion" href="#collapse1"
+                   aria-controls="#collapse1" aria-expanded="false">
+                    <span class="resourceUri GET">GET</span>&nbsp;
+                    <span class="resourceUri">/translations/{locale}</span>&nbsp;&nbsp;
+                    <span class="mono inlined">Get all translations for a given locale.</span>
+                    
+                </a>
+            </div>
+
+            <div id="collapse1" class="panel-body panel-collapse collapse">
+                <h4>Description</h4>
+                
+                <h4>Security</h4>
+
+                
+
+                <h4>Parameters</h4>
+
+                <table class="parameters table table-bordered table-striped">
+                    <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Located in</th>
+                        <th>Description</th>
+                        <th>Required</th>
+                        <th>Schema</th>
+                    </tr>
+                    </thead>
+                    
+                    <tbody class="parameters">
+                    <tr>
+                        <td><span class="mono">locale</span></td>
+                        <td>
+                            
+                            <span class="mono"></span>
+                            
+                        </td>
+                        <td><span class="mono">The locale.</span></td>
+                        <td><span class="mono">false</span></td>
+                        <td>
+                            <div class="indented">
+    
+
+    <div class="mono"><span class="bold">Type: </span><span class="type bold">string</span></div>
+    
+    <div class="mono">
+        <span class="bold">Description: </span><span>The locale.</span>
+    </div>
+    
+
+    
+        <div>
+    
+    
+    
+    
+    
+</div>
+    
+    
+    
+    
+    
+    
+    
+    
+</div>
+                        </td>
+                    </tr>
+                    </tbody>
+                    
+                </table>
+
+                <h4>Responses</h4>
+
+                <table class="responses table table-bordered table-striped">
+                    <thead>
+                    <tr>
+                        <th>Code</th>
+                        <th>Description</th>
+                        <th>Schema</th>
+                    </tr>
+                    </thead>
+                    
+                    <tbody class="responses">
+                    <tr>
+                        <td><span class="mono">200</span></td>
+                        <td>
+                            
+                            <span class="mono">An object containing all the translations for the locale.</span>
+                            
+                        </td>
+                        <td>
+                            
+                            <div>
+                                <div class="indented">
+    
+
+    <div class="mono"><span class="bold">Type: </span><span class="type bold">object</span></div>
+    
+
+    
+    
+    
+    
+    
+    
+        <div>
+    <span>{</span>
+    <ul class="properties">
+        
+        <li>
+            <span>{key}
+                
+                
+                </span>:&nbsp;
+            
+
+            <div class="indented">
+    
+
+    <div class="mono"><span class="bold">Type: </span><span class="type bold">string</span></div>
+    
+    <div class="mono">
+        <span class="bold">Description: </span><span>The key</span>
+    </div>
+    
+
+    
+        <div>
+    
+    
+    
+    
+    
+</div>
+    
+    
+    
+    
+    
+    
+    
+    
+</div>
+        </li>
+        
+    </ul>
+    <span>}</span>
+</div>
+    
+    
+    
+</div>
+                            </div>
+                            
+                        </td>
+                    </tr>
+                    </tbody>
+                    
+                    <tbody class="responses">
+                    <tr>
+                        <td><span class="mono">404</span></td>
+                        <td>
+                            
+                            <span class="mono">When the query uuid doesnt exists.</span>
+                            
+                        </td>
+                        <td>
+                            
+                        </td>
+                    </tr>
+                    </tbody>
+                    
+                </table>
+            </div>
+        </div>
+    </div>
+    
+</div>
+
+
+<div class="definitions col-md-8">
+    <h2 class="header">Models:</h2>
+
+    
+    <div class="definitions panel panel-primary">
+        <div class="indented">
+    
+    <h3 id="/definitions/}">Error</h3>
+    
+
+    <div class="mono"><span class="bold">Type: </span><span class="type bold">object</span></div>
+    
+
+    
+    
+    
+    
+    
+    
+        <div>
+    <span>{</span>
+    <ul class="properties">
+        
+        <li>
+            <span>message
+                
+                
+                </span>:&nbsp;
+            
+
+            <div class="indented">
+    
+
+    <div class="mono"><span class="bold">Type: </span><span class="type bold">string</span></div>
+    
+    <div class="mono">
+        <span class="bold">Description: </span><span>The raw error message.</span>
+    </div>
+    
+
+    
+        <div>
+    
+    
+    
+    
+    
+</div>
+    
+    
+    
+    
+    
+    
+    
+    
+</div>
+        </li>
+        
+        <li>
+            <span>code
+                
+                
+                </span>:&nbsp;
+            
+
+            <div class="indented">
+    
+
+    <div class="mono"><span class="bold">Type: </span><span class="type bold">string</span></div>
+    
+    <div class="mono">
+        <span class="bold">Description: </span><span>The error code (used for i18n)</span>
+    </div>
+    
+
+    
+        <div>
+    
+    
+    
+    
+    
+</div>
+    
+    
+    
+    
+    
+    
+    
+    
+</div>
+        </li>
+        
+        <li>
+            <span>fields
+                
+                
+                </span>:&nbsp;
+            
+
+            <div class="indented">
+    
+
+    <div class="mono"><span class="bold">Type: </span><span class="type bold">array</span></div>
+    
+    <div class="mono">
+        <span class="bold">Description: </span><span>List of additionnal fields to display in the error message (for i18n).</span>
+    </div>
+    
+
+    
+    
+    
+    
+    
+        <div>
+    <span class="mono bold">Items: </span>
+    <span>
+        <div class="indented">
+    
+
+    <div class="mono"><span class="bold">Type: </span><span class="type bold">string</span></div>
+    
+
+    
+        <div>
+    
+    
+    
+    
+    
+</div>
+    
+    
+    
+    
+    
+    
+    
+    
+</div>
+    </span>
+</div>
+    
+    
+    
+    
+</div>
+        </li>
+        
+    </ul>
+    <span>}</span>
+</div>
+    
+    
+    
+</div>
+    </div>
+    
+</div>
+
+<div class="security-schemes col-md-8">
+    <h2 class="header">Security schemes:</h2>
+
+    
+    <div class="securitySchemes panel panel-primary">
+        <h3 id="/security/Doorman">Doorman</h3>
+
+        <div class="mono"><span class="bold">Type: </span><span>apiKey</span></div>
+        <div class="mono"><span class="bold">In: </span><span>header</span></div>
+        <div class="mono"><span class="bold">Name: </span><span>X-UserToken</span></div>
+    </div>
+    
+</div>
+
+
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+</body>
+</html>

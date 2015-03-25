@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Api documentation</title>
+    [[webjar 'bootstrap.css']]
+    <style>
+
+        .mono {
+            font-family: Monaco, 'Lucida Console', monospace;
+        }
+
+        .bold {
+            font-weight: bold;
+        }
+
+        .resourceUri {
+            font-family: Monaco, 'Lucida Console', monospace;
+        }
+
+        .GET {
+            font-family: Monaco, 'Lucida Console', monospace;
+            background: rgb(35, 146, 247);
+            color: #fff;
+        }
+
+        .POST {
+            font-family: Monaco, 'Lucida Console', monospace;
+            background: rgb(19, 194, 15);
+            color: #fff;
+        }
+
+        .PUT {
+            font-family: Monaco, 'Lucida Console', monospace;
+            background: rgb(255, 144, 0);
+            color: #fff;
+        }
+
+        .DELETE {
+            font-family: Monaco, 'Lucida Console', monospace;
+            background: rgb(227, 0, 18);
+            color: #fff;
+        }
+
+        .inlined {
+            font-style: italic;
+            font-weight: normal;
+        }
+
+        .indented {
+            margin-left: 20px;
+        }
+
+        .type {
+            color: #468847;
+        }
+
+        h1 {
+            margin: 0;
+            background: #2D679C;
+            padding: 20px 45px;
+            color: #fff;
+            text-shadow: 1px 1px 1px rgba(0, 0, 0, .3);
+            border-bottom: 1px solid #15A1D8;
+            font-family: Monaco, 'Lucida Console', monospace;
+            font-size: 28px;
+        }
+
+    </style>
+</head>
+<body>
+<h1>Api documentation</h1>
+
+<div class="info col-md-8">
+    <h2 class="header"><span>[[ api.title ]]</span>
+        <small class="inlined">(<a href="[[ apiBaseUri ]]/raw">Download raw file</a>)</small>
+    </h2>
+
+    <div class="mono">[[ api.description ]]</div>
+
+    <div class="mono bold">Version: <span>[[ api.version ]]</span></div>
+</div>
+
+<div class="resources col-md-8">
+    <h2 class="header">Resources:</h2>
+
+    [[#each api.resources]]
+    <div class="panel-group resources" id="resourcesAccordion" role="tablist" aria-multiselectable="true">
+        <div class="panel panel-default">
+            <div class="panel-heading" role="tab">
+                <a data-toggle="collapse" data-parent="#resourcesAccordion" href="#collapse[[ @index ]]"
+                   aria-controls="#collapse[[ @index ]]" aria-expanded="false">
+                    <span class="resourceUri [[ this.method ]]">[[ this.method ]]</span>&nbsp;
+                    <span class="resourceUri">[[ this.uri ]]</span>&nbsp;&nbsp;
+                    <span class="mono inlined">[[ this.summary ]]</span>
+                    [[#if this.available]]
+                    <span class="label label-warning">(Not available)</span>
+                    [[/if]]
+                </a>
+            </div>
+
+            <div id="collapse[[ @index ]]" class="panel-body panel-collapse collapse">
+                <h4>Description</h4>
+                [[#if this.description.isPresent]]
+                <span>[[ description.get ]]</span>
+                [[/if]]
+                <h4>Security</h4>
+
+                [[#each this.security]]
+                <div>
+                    <a href="#/security/[[this.securityScheme]]"><span>[[this.securityScheme]]</span></a> : <span>[[this.roles]]</span>
+                </div>
+                [[/each]]
+
+                <h4>Parameters</h4>
+
+                <table class="parameters table table-bordered table-striped">
+                    <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Located in</th>
+                        <th>Description</th>
+                        <th>Required</th>
+                        <th>Schema</th>
+                    </tr>
+                    </thead>
+                    [[#each this.parameters]]
+                    <tbody class="parameters">
+                    <tr>
+                        <td><span class="mono">[[ this.name ]]</span></td>
+                        <td>
+                            [[#if this.locatedIn ]]
+                            <span class="mono">[[this.locatedIn]]</span>
+                            [[else]]
+                            <span class="mono">(undefined)</span>
+                            [[/if]]
+                        </td>
+                        <td><span class="mono">[[this.description]]</span></td>
+                        <td><span class="mono">[[this.required]]</span></td>
+                        <td>
+                            [[> schema-partial this.schema]]
+                        </td>
+                    </tr>
+                    </tbody>
+                    [[/each]]
+                </table>
+
+                <h4>Responses</h4>
+
+                <table class="responses table table-bordered table-striped">
+                    <thead>
+                    <tr>
+                        <th>Code</th>
+                        <th>Description</th>
+                        <th>Schema</th>
+                    </tr>
+                    </thead>
+                    [[#each this.responses]]
+                    <tbody class="responses">
+                    <tr>
+                        <td><span class="mono">[[this.code]]</span></td>
+                        <td>
+                            [[#if this.description.isPresent]]
+                            <span class="mono">[[description.get]]</span>
+                            [[/if]]
+                        </td>
+                        <td>
+                            [[#if this.schema.isPresent]]
+                            <div>
+                                [[> schema-partial schema.get]]
+                            </div>
+                            [[/if]]
+                        </td>
+                    </tr>
+                    </tbody>
+                    [[/each]]
+                </table>
+            </div>
+        </div>
+    </div>
+    [[/each]]
+</div>
+
+
+<div class="definitions col-md-8">
+    <h2 class="header">Models:</h2>
+
+    [[#each api.definitions]]
+    <div class="definitions panel panel-primary">
+        [[> schema-partial this]]
+    </div>
+    [[/each]]
+</div>
+
+<div class="security-schemes col-md-8">
+    <h2 class="header">Security schemes:</h2>
+
+    [[#each api.securitySchemes]]
+    <div class="securitySchemes panel panel-primary">
+        <h3 id="/security/[[this.title]]">[[this.title]]</h3>
+
+        <div class="mono"><span class="bold">Type: </span><span>[[this.type]]</span></div>
+        <div class="mono"><span class="bold">In: </span><span>[[this.locatedIn]]</span></div>
+        <div class="mono"><span class="bold">Name: </span><span>[[this.name]]</span></div>
+    </div>
+    [[/each]]
+</div>
+
+
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+</body>
+</html>

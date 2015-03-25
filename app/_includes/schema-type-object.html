@@ -1,0 +1,19 @@
+<div>
+    <span>{</span>
+    <ul class="properties">
+        [[#each this.properties]]
+        <li>
+            <span>[[this.name]]
+                [[schema.required.contains]]
+                [[#if schema.required.contains]]
+                    <span> (required)</span>
+                [[/if]]
+                </span>:&nbsp;
+            [[property]]
+
+            [[> schema-partial this.schema]]
+        </li>
+        [[/each]]
+    </ul>
+    <span>}</span>
+</div>

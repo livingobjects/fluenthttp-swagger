@@ -1,0 +1,37 @@
+<div class="indented">
+    [[#if this.title.isPresent]]
+    <h3 id="/definitions/[[this.title.get]]}">[[title.get]]</h3>
+    [[/if]]
+
+    <div class="mono"><span class="bold">Type: </span><span class="type bold">[[this.type.value]]</span></div>
+    [[#if this.description.isPresent]]
+    <div class="mono">
+        <span class="bold">Description: </span><span>[[ description.get ]]</span>
+    </div>
+    [[/if]]
+
+    [[#if this.type.isString]]
+        [[> schema-type-string ..]]
+    [[/if]]
+    [[#if this.type.isRef]]
+        [[> schema-type-ref ..]]
+    [[/if]]
+    [[#if this.type.isOneOf]]
+        [[> schema-type-one-of ..]]
+    [[/if]]
+    [[#if this.type.isAnyOf]]
+        [[> schema-type-any-of ..]]
+    [[/if]]
+    [[#if this.type.isArray]]
+        [[> schema-type-array ..]]
+    [[/if]]
+    [[#if this.type.isObject]]
+        [[> schema-type-object ..]]
+    [[/if]]
+    [[#if this.type.isNumber]]
+        [[> schema-type-number ..]]
+    [[/if]]
+    [[#if this.type.isInteger]]
+        [[> schema-type-number ..]]
+    [[/if]]
+</div>

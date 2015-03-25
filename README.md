@@ -13,6 +13,21 @@ This module is done to be deployed to your fluenthttp.
 
 See details below for the routes created by fluenthttp-swagger.
 
+## Usage
+
+Dont forget to add this extension:
+
+```java
+.setExtensions(new Extensions() {
+    @Override
+    public void configureCompilers(CompilersConfiguration compilers, Env env) {
+        compilers.configureHandlebars(handlebar -> handlebar.infiniteLoops(true));
+    }
+})
+```
+
+We are waiting for https://github.com/CodeStory/fluent-http/pull/102 to be merged
+
 ## Build
 
 Run maven
