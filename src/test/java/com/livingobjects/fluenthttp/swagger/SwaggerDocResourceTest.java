@@ -58,9 +58,20 @@ public class SwaggerDocResourceTest {
     }
 
     @Test
+    public void shouldDisplayRawYamlApi() throws Exception {
+        Request request = new Request.Builder()
+                .url("http://localhost:" + webServer.port() + "/api-doc/translations/raw")
+                .build();
+
+        Response response = new OkHttpClient().newCall(request).execute();
+
+        assertThat(response.body().string()).isEqualTo(Files.toString(new File(SwaggerDocResourceTest.class.getClassLoader().getResource("api.yaml").toURI()), Charsets.UTF_8));
+    }
+
+    @Test
     @Ignore
     public void infiniteServer() throws Exception {
-        ImmutableList<File> of = ImmutableList.of(new File(SwaggerDocResourceTest.class.getClassLoader().getResource("api.yml").toURI()));
+        ImmutableList<File> of = ImmutableList.of(new File(SwaggerDocResourceTest.class.getClassLoader().getResource("api.yaml").toURI()));
         WebServer webServer = new WebServer().configure(routes -> routes.add(new SwaggerDocResource(of))
         ).start(9200);
 
