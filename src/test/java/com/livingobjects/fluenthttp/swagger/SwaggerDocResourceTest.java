@@ -5,6 +5,7 @@ import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.Request;
 import com.squareup.okhttp.Response;
 import net.codestory.http.WebServer;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import java.io.File;
@@ -33,6 +34,7 @@ public class SwaggerDocResourceTest {
     }
 
     @Test
+    @Ignore
     public void infiniteServer() throws Exception {
         ImmutableList<File> of = ImmutableList.of(new File(SwaggerDocResourceTest.class.getClassLoader().getResource("api.yaml").toURI()));
         WebServer webServer = new WebServer().configure(routes -> routes.add(new SwaggerDocResource(of))
