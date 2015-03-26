@@ -70,8 +70,7 @@ public class SwaggerDocResourceTest {
     @Test
     @Ignore
     public void infiniteServer() throws Exception {
-        ImmutableList<File> of = ImmutableList.of(new File(SwaggerDocResourceTest.class.getClassLoader().getResource("api.yaml").toURI()));
-        new WebServer().configure(routes -> SwaggerEntryPoint.addApiDocRoutes(routes, of)).start(9200);
+        webServer.start(9200);
 
         while (true) {
             Thread.sleep(1000);

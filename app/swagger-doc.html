@@ -137,7 +137,7 @@
                         <td><span class="mono">[[this.description]]</span></td>
                         <td><span class="mono">[[this.required]]</span></td>
                         <td>
-                            [[> schema-partial this.schema]]
+                            [[> swagger-schema-partial this.schema]]
                         </td>
                     </tr>
                     </tbody>
@@ -166,7 +166,7 @@
                         <td>
                             [[#if this.schema.isPresent]]
                             <div>
-                                [[> schema-partial schema.get]]
+                                [[> swagger-schema-partial schema.get]]
                             </div>
                             [[/if]]
                         </td>
@@ -186,7 +186,7 @@
 
     [[#each api.definitions]]
     <div class="definitions panel panel-primary">
-        [[> schema-partial this]]
+        [[> swagger-schema-partial this]]
     </div>
     [[/each]]
 </div>
