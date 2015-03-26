@@ -3,19 +3,19 @@ package com.livingobjects.fluenthttp.swagger.impls;
 import com.google.common.collect.ImmutableSet;
 import com.livingobjects.myrddin.ApiSpecification;
 
-import java.io.File;
+import java.net.URL;
 
 public final class ApiDoc {
 
     public final ImmutableSet<String> baseUris;
 
-    public final File swaggerFile;
+    public final URL swaggerUrl;
 
     public final ApiSpecification apiSpecification;
 
-    public ApiDoc(ImmutableSet<String> baseUris, File swaggerFile, ApiSpecification apiSpecification) {
+    public ApiDoc(ImmutableSet<String> baseUris, URL swaggerUrl, ApiSpecification apiSpecification) {
         this.baseUris = baseUris;
-        this.swaggerFile = swaggerFile;
+        this.swaggerUrl = swaggerUrl;
         this.apiSpecification = apiSpecification;
     }
 }
