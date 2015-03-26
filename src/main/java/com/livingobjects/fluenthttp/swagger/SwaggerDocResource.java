@@ -84,14 +84,14 @@ public final class SwaggerDocResource {
 
     @Get("/api-doc")
     public ModelAndView displayDocumentationIndex() {
-        return ModelAndView.of("index", "uris", baseUriMap.keySet());
+        return ModelAndView.of("swagger-index", "uris", baseUriMap.keySet());
     }
 
     @Get("/api-doc/:api")
     public Payload displayDocumentation(String api) {
         ApiDoc apiDoc = baseUriMap.get(api);
         if (apiDoc != null) {
-            return new Payload(ModelAndView.of("doc", "apiBaseUri", api, "api", apiDoc.apiSpecification));
+            return new Payload(ModelAndView.of("swagger-doc", "apiBaseUri", api, "api", apiDoc.apiSpecification));
         } else {
             return notFound();
         }
