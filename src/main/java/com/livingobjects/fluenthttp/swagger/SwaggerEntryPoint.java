@@ -10,8 +10,8 @@ import java.net.URL;
 
 public class SwaggerEntryPoint {
 
-    public static Routes addApiDocRoutes(Routes routes, ImmutableList<URL> swaggerFiles) {
-        return routes.add(new SwaggerDocResource(swaggerFiles))
+    public static Routes addApiDocRoutes(Routes routes, ImmutableList<URL> swaggerUrls) {
+        return routes.add(new SwaggerDocResource(swaggerUrls))
                 .setExtensions(new Extensions() {
                     @Override
                     public void configureCompilers(CompilersConfiguration compilers, Env env) {
