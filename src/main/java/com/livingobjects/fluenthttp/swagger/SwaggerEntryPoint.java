@@ -6,11 +6,11 @@ import net.codestory.http.extensions.Extensions;
 import net.codestory.http.misc.Env;
 import net.codestory.http.routes.Routes;
 
-import java.io.File;
+import java.net.URL;
 
 public class SwaggerEntryPoint {
 
-    public static Routes addApiDocRoutes(Routes routes, ImmutableList<File> swaggerFiles) {
+    public static Routes addApiDocRoutes(Routes routes, ImmutableList<URL> swaggerFiles) {
         return routes.add(new SwaggerDocResource(swaggerFiles))
                 .setExtensions(new Extensions() {
                     @Override

@@ -32,12 +32,9 @@ import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
-import java.net.MalformedURLException;
 import java.net.URL;
-import java.nio.file.Files;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.stream.Collectors;
@@ -50,9 +47,9 @@ public final class SwaggerDocResource {
 
     private final ConcurrentHashMap<String, ApiDoc> baseUriMap = new ConcurrentHashMap<>();
 
-    public SwaggerDocResource(ImmutableList<File> swaggerFiles) {
-        for (File swaggerFile : swaggerFiles) {
-            try (InputStream in = Files.newInputStream(swaggerFile.toPath())) {
+    public SwaggerDocResource(ImmutableList<URL> swaggerUrls) {
+        for (URL swaggerUrl : swaggerUrls) {
+            try (InputStream in = swaggerUrl.openStream()) {
                 if (in != null) {
                     Wizard wizard = new Wizard();
                     try {
@@ -66,18 +63,18 @@ public final class SwaggerDocResource {
                             }
                         }).filter(s -> s != null).collect(Collectors.toSet());
                         ImmutableSet<String> immutableBaseUris = ImmutableSet.copyOf(baseUris);
-                        ApiDoc apiDoc = new ApiDoc(immutableBaseUris, swaggerFile, apiSpecification);
+                        ApiDoc apiDoc = new ApiDoc(immutableBaseUris, swaggerUrl, apiSpecification);
                         for (String baseUri : immutableBaseUris) {
                             baseUriMap.put(baseUri, apiDoc);
                         }
                     } catch (SwaggerException e) {
-                        LOGGER.error("Swagger documentation '{}' is invalid.", swaggerFile, e);
+                        LOGGER.error("Swagger documentation '{}' is invalid.", swaggerUrl, e);
                     }
                 } else {
-                    LOGGER.error("Swagger documentation '{}' not found. Check Swagger-Doc attribute in manifest.", swaggerFile);
+                    LOGGER.error("Swagger documentation '{}' not found. Check Swagger-Doc attribute in manifest.", swaggerUrl);
                 }
             } catch (IOException e) {
-                LOGGER.error("Swagger documentation '{}' not found. Check Swagger-Doc attribute in manifest.", swaggerFile, e);
+                LOGGER.error("Swagger documentation '{}' not found. Check Swagger-Doc attribute in manifest.", swaggerUrl, e);
             }
         }
     }
@@ -101,17 +98,11 @@ public final class SwaggerDocResource {
     public Payload displayRawDocumentation(String api) {
         ApiDoc apiDoc = baseUriMap.get(api);
         if (apiDoc != null) {
-            URL url;
-            try {
-                url = apiDoc.swaggerFile.toURI().toURL();
-            } catch (MalformedURLException e) {
-                LOGGER.error("Swagger documentation '{}' not found", apiDoc.swaggerFile);
-                return notFound();
-            }
+            URL url = apiDoc.swaggerUrl;
             try (InputStream in = url.openStream()) {
                 return new Payload("text/plain", IOUtils.toString(in));
             } catch (IOException e) {
-                LOGGER.error("Swagger documentation '{}' not found", apiDoc.swaggerFile, e);
+                LOGGER.error("Swagger documentation '{}' not found", apiDoc.swaggerUrl, e);
                 return notFound();
             }
         } else {

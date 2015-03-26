@@ -13,6 +13,7 @@ import org.junit.Ignore;
 import org.junit.Test;
 
 import java.io.File;
+import java.net.URL;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -24,7 +25,7 @@ public class SwaggerDocResourceTest {
 
     @BeforeClass
     public static void setUp() throws Exception {
-        ImmutableList<File> swaggerFiles = ImmutableList.of(new File(SwaggerDocResourceTest.class.getClassLoader().getResource("api.yaml").toURI()));
+        ImmutableList<URL> swaggerFiles = ImmutableList.of(SwaggerDocResourceTest.class.getClassLoader().getResource("api.yaml"));
         webServer = new WebServer().configure(routes -> SwaggerEntryPoint.addApiDocRoutes(routes, swaggerFiles)).startOnRandomPort();
     }
 
