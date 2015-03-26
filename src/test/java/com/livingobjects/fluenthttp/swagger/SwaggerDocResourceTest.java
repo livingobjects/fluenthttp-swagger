@@ -7,9 +7,6 @@ import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.Request;
 import com.squareup.okhttp.Response;
 import net.codestory.http.WebServer;
-import net.codestory.http.compilers.CompilersConfiguration;
-import net.codestory.http.extensions.Extensions;
-import net.codestory.http.misc.Env;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Ignore;
@@ -27,16 +24,8 @@ public class SwaggerDocResourceTest {
 
     @BeforeClass
     public static void setUp() throws Exception {
-        ImmutableList<File> of = ImmutableList.of(new File(SwaggerDocResourceTest.class.getClassLoader().getResource("api.yaml").toURI()));
-        webServer = new WebServer().configure(routes -> routes
-                        .add(new SwaggerDocResource(of))
-                        .setExtensions(new Extensions() {
-                            @Override
-                            public void configureCompilers(CompilersConfiguration compilers, Env env) {
-                                compilers.configureHandlebars(handlebar -> handlebar.infiniteLoops(true));
-                            }
-                        })
-        ).startOnRandomPort();
+        ImmutableList<File> swaggerFiles = ImmutableList.of(new File(SwaggerDocResourceTest.class.getClassLoader().getResource("api.yaml").toURI()));
+        webServer = new WebServer().configure(routes -> SwaggerEntryPoint.addApiDocRoutes(routes, swaggerFiles)).startOnRandomPort();
     }
 
     @AfterClass
@@ -82,10 +71,7 @@ public class SwaggerDocResourceTest {
     @Ignore
     public void infiniteServer() throws Exception {
         ImmutableList<File> of = ImmutableList.of(new File(SwaggerDocResourceTest.class.getClassLoader().getResource("api.yaml").toURI()));
-        WebServer webServer = new WebServer().configure(routes -> routes.add(new SwaggerDocResource(of))
-        ).start(9200);
-
-        System.out.println(webServer.port());
+        new WebServer().configure(routes -> SwaggerEntryPoint.addApiDocRoutes(routes, of)).start(9200);
 
         while (true) {
             Thread.sleep(1000);
